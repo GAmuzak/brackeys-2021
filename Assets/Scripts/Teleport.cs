@@ -6,10 +6,13 @@ public class Teleport : MonoBehaviour
 {
     public float teleportDistance = 2.0f;
     public Transform playerTransform;
-    public bool canTeleport = true;
+    public bool canTeleport;
     [SerializeField] Rigidbody2D rb;
 
     // Update is called once per frame
+    void Start() {
+        canTeleport = false;
+    }
     void Update()
     {
         TeleportPlayer();

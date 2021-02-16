@@ -4,31 +4,23 @@ using UnityEngine;
 
 public class BasicMovement : MonoBehaviour
 {
-    [SerializeField]
-    private float movementSpeed = 5.0f;
-    [SerializeField]
-    private Rigidbody2D rb_body;
-    [SerializeField]
-    private bool facingRight = true;
-
+    public float movementSpeed = 5.0f;
+    public Rigidbody2D rb_body;
+    public bool facingRight = true;
+    public float movement;
 
     // Update is called once per frame
 
     void Start() {
         rb_body = GetComponent<Rigidbody2D>();
     }
-    void Update()
+    void FixedUpdate()
     {
-        float moveDir = Input.GetAxis("Horizontal");
-        Move(moveDir);
-    }
-
-   void Move(float moveDir)
-    {
-        rb_body.velocity = (new Vector2(moveDir * movementSpeed, rb_body.velocity.y));
-        if (facingRight && moveDir < 0)
+        movement = Input.GetAxis("Horizontal");
+        rb_body.velocity = new Vector2(movement * movementSpeed, rb_body.velocity.y);
+        if (facingRight && movement<0)
             Flip();
-        else if (!facingRight && moveDir > 0)
+        else if (!facingRight && movement>0)
             Flip();
     }
 
