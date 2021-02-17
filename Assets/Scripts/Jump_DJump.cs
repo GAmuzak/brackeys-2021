@@ -8,7 +8,7 @@ public class Jump_DJump : MonoBehaviour
 
     public float jumpForce = 5.0f;
     public int extraJumps = 0;
-
+    public bool canJump;
     public bool canDJump = false;
 
     [SerializeField] LayerMask groundMask;
@@ -16,7 +16,7 @@ public class Jump_DJump : MonoBehaviour
     [SerializeField] Transform bottom;
 
     int jumpCount = 0;
-    bool isGrounded;
+    public bool isGrounded;
     float jumpCooldown;
 
     // Start is called before the first frame update
@@ -31,9 +31,12 @@ public class Jump_DJump : MonoBehaviour
     void Update()
     {
         CanDJump();
-        if (Input.GetButtonDown("Jump"))
+        if (canJump)
         {
-            Jump();
+            if (Input.GetButtonDown("Jump"))
+            {
+                Jump();
+            }
         }
         CheckGrounded();
     }
@@ -67,6 +70,7 @@ public class Jump_DJump : MonoBehaviour
             isGrounded = true;
             jumpCount = 0;
             jumpCooldown = Time.time + 0.0001f;
+            canJump = true;
         }
         else if (Time.time < jumpCooldown)
         {

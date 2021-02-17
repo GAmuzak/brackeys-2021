@@ -8,6 +8,7 @@ public class BasicMovement : MonoBehaviour
     public Rigidbody2D rb_body;
     public bool facingRight = true;
     public float movement;
+    public int wallJumpDirection = 1;
 
     // Update is called once per frame
 
@@ -27,8 +28,9 @@ public class BasicMovement : MonoBehaviour
     void Flip()
     {
         facingRight = !facingRight;
-        Vector3 Scaler = transform.localScale;
-        Scaler.x = -1;
-        transform.localScale = Scaler;
+        Vector3 Rotater = transform.localEulerAngles;
+        Rotater.y += -180;
+        transform.localEulerAngles = Rotater;
+        wallJumpDirection *= -1;
     }
 }
