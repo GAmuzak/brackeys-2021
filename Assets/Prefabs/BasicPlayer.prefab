@@ -18,7 +18,8 @@ GameObject:
   - component: {fileID: 3635188429446984748}
   - component: {fileID: 3635188429446984749}
   - component: {fileID: 3635188429446984750}
-  m_Layer: 0
+  - component: {fileID: 1855613534}
+  m_Layer: 11
   m_Name: BasicPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -177,6 +178,7 @@ MonoBehaviour:
   rb_body: {fileID: 3635188429446984747}
   facingRight: 1
   movement: 0
+  wallJumpDirection: 1
 --- !u!114 &3635188429446984748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,12 +194,17 @@ MonoBehaviour:
   player: {fileID: 3635188429446984740}
   jumpForce: 7.3
   extraJumps: 1
+  canJump: 0
   canDJump: 0
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 1024
   rb_body: {fileID: 3635188429446984747}
   bottom: {fileID: 3635188430078016207}
+  isGrounded: 0
 --- !u!114 &3635188429446984749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +235,33 @@ MonoBehaviour:
   playerTransform: {fileID: 3635188429446984751}
   canTeleport: 0
   rb: {fileID: 3635188429446984747}
+--- !u!114 &1855613534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3635188429446984740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb950c11a8c1d8c4982395ef718facd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWallJumping: 0
+  wallSlideSpeed: 1
+  DJump: {fileID: 3635188429446984748}
+  basic: {fileID: 3635188429446984755}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  wallCheckPoint: {fileID: 0}
+  wallCheckSize: {x: 0, y: 0}
+  side: {fileID: 5124869004636639446}
+  isTouchingWall: 0
+  rb_body: {fileID: 3635188429446984747}
+  isWallSliding: 1
+  wallJumpForce: 8
+  wallJumpAngle: {x: 1, y: 3}
 --- !u!1 &3635188430078016200
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,10 +271,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3635188430078016207}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Feet
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -267,10 +301,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5124869004636639446}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Side
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

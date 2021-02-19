@@ -12,6 +12,7 @@ public class Jump_DJump : MonoBehaviour
     public bool canDJump = false;
 
     [SerializeField] LayerMask groundMask;
+    [SerializeField] LayerMask enemyMask;
     [SerializeField] Rigidbody2D rb_body;
     [SerializeField] Transform bottom;
 
@@ -65,7 +66,7 @@ public class Jump_DJump : MonoBehaviour
     }
     void CheckGrounded()
     {
-        if (Physics2D.OverlapCircle(bottom.position, 0.5f, groundMask))
+        if ((Physics2D.OverlapCircle(bottom.position, 0.5f, groundMask))||(Physics2D.OverlapCircle(bottom.position,0.5f,enemyMask)))
         {
             isGrounded = true;
             jumpCount = 0;
