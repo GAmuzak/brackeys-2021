@@ -103,6 +103,7 @@ public class BetterMovement : MonoBehaviour
     
     void Jump(Vector2 dir, bool wall)
     {
+        if (Input.GetButtonDown("Jump") && OnGround)
         //rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.velocity += dir * jumpForce;
     }

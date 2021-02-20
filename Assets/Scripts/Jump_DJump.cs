@@ -11,19 +11,17 @@ public class Jump_DJump : MonoBehaviour
     public bool canJump;
     public bool canDJump = false;
 
-    [SerializeField] LayerMask groundMask;
+    [SerializeField] BasicMovement basic;
     [SerializeField] LayerMask enemyMask;
-    [SerializeField] Rigidbody2D rb_body;
-    [SerializeField] Transform bottom;
+    [SerializeField] Rigidbody2D rb;
 
     int jumpCount = 0;
-    public bool isGrounded;
     float jumpCooldown;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb_body = player.GetComponent<Rigidbody2D>();
+        rb = player.GetComponent<Rigidbody2D>();
         canDJump = false;
     }
 
@@ -34,10 +32,7 @@ public class Jump_DJump : MonoBehaviour
         CanDJump();
         if (canJump)
         {
-            if (Input.GetButtonDown("Jump"))
-            {
-                Jump();
-            }
+            Jump();
         }
         CheckGrounded();
     }
@@ -51,35 +46,37 @@ public class Jump_DJump : MonoBehaviour
     }
     void Jump()
     {
-        if (isGrounded || jumpCount < extraJumps)
+        if (Input.GetButtonDown("Jump"))
         {
-            rb_body.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-            if (extraJumps > 0)
+            if (basic.OnGround || jumpCount < extraJumps)
             {
-                jumpCount++;
-            }
-            else
-            {
-                return;
+                rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+                if (extraJumps > 0)
+                {
+                    jumpCount++;
+                }
+                else
+                {
+                    return;
+                }
             }
         }
     }
     void CheckGrounded()
     {
-        if ((Physics2D.OverlapCircle(bottom.position, 0.5f, groundMask))||(Physics2D.OverlapCircle(bottom.position,0.5f,enemyMask)))
+        if (basic.OnGround||basic.OnEnemy)
         {
-            isGrounded = true;
             jumpCount = 0;
             jumpCooldown = Time.time + 0.0001f;
             canJump = true;
         }
         else if (Time.time < jumpCooldown)
         {
-            isGrounded = true;
+            basic.OnGround = true;
         }
         else
         {
-            isGrounded = false;
+            basic.OnGround = false;
         }
     }
 
