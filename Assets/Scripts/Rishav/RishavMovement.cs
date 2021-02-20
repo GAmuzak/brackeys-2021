@@ -14,7 +14,11 @@ public class RishavMovement : MonoBehaviour
     [SerializeField]
     private float jumpForce = 5;
     public bool wallSlide=false;
-    public float slideSpeed = 5;
+    [SerializeField]
+    private float slideSpeed = 200f;
+
+    public bool wallJumped=false;
+    public bool canMove=true;
 
 
 
@@ -23,7 +27,7 @@ public class RishavMovement : MonoBehaviour
     void Start()
     {
         coll = GetComponent<RishavCollision>();
-
+        Debug.Log(Time.deltaTime);
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -37,7 +41,9 @@ public class RishavMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (coll.onGround)
-                Jump();
+                Jump(Vector2.up);
+            if (coll.onWall && !coll.onGround)
+                WallJump();
         }
         if(coll.onWall && !coll.onGround)
         {
@@ -49,15 +55,37 @@ public class RishavMovement : MonoBehaviour
         }
     }
 
+
+    private void WallJump()
+    {
+        StopCoroutine(DisableMovement(0));
+        StartCoroutine(DisableMovement(.5f));
+
+        Vector2 wallDir = coll.onRightWall ? Vector2.left : Vector2.right;
+
+        Jump((Vector2.up + wallDir / 1.5f));
+
+        wallJumped = true;
+    }
     private void Walk(Vector2 dir)
     {
-        rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(dir.x * speed, rb.velocity.y)), wallJumpLerp * Time.deltaTime);
+        if (!canMove)
+            return;
+
+        if (!wallJumped)
+        {
+            rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(dir.x * speed, rb.velocity.y)), wallJumpLerp * Time.deltaTime);
+        }
     }
 
-    private void Jump()
+    private void Jump(Vector2 dir)
     {
         rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.velocity += Vector2.up * jumpForce;
+        rb.velocity += dir * jumpForce;
     }
 
     private void WallSlide()
@@ -67,7 +95,14 @@ public class RishavMovement : MonoBehaviour
         {
             pushingWall = true;
         }
-        float push = pushingWall ? 0 : rb.velocity.x;
-        rb.velocity = new Vector2(push, -slideSpeed);
+        float push = pushingWall ? rb.velocity.x:0;
+        rb.velocity = new Vector2(push, -slideSpeed*Time.deltaTime);
     }
-}
+
+    IEnumerator DisableMovement(float time)
+    {
+        canMove = false;
+        yield return new WaitForSeconds(time);
+        canMove = true;
+    }
+} 
