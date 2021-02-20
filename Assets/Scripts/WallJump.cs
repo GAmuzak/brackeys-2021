@@ -6,29 +6,26 @@ public class WallJump : MonoBehaviour
 {
     [SerializeField] bool isWallJumping = false;
     [SerializeField] bool isWallSliding;
-    [SerializeField] bool isTouchingWall;
     [SerializeField] float wallSlideSpeed = 0f;
     [SerializeField] float wallJumpForce;
     [SerializeField] Jump_DJump DJump;
     [SerializeField] BasicMovement basic;
-    [SerializeField] Vector2 wallJumpAngle;
-    [SerializeField] Vector2 wallCheckSize;
-    [SerializeField] Transform side;
-    [SerializeField] Transform wallCheckPoint;
     [SerializeField] Rigidbody2D rb;
+    public int isLeftOrRight;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
-        wallJumpAngle.Normalize();
         isWallJumping = true;
     }
     void Update() {
         WallSlide();
         WallJumping();
+        LeftOrRight();
     }
+
     void WallSlide()
     {
-        if (isTouchingWall && !basic.OnGround && rb.velocity.y<0) 
+        if (basic.OnWall && !basic.OnGround && rb.velocity.y<0) 
         {
             isWallSliding = true;
         }
@@ -48,14 +45,22 @@ public class WallJump : MonoBehaviour
     {
         if (isWallJumping)
         {
-            if((isWallSliding || isTouchingWall) && DJump.canJump)
+            if((isWallSliding || basic.OnWall) && DJump.canJump && !basic.OnGround)
             {
                 if (Input.GetButtonDown("Jump"))
                 {
-                    rb.AddForce(new Vector2(wallJumpForce * -basic.wallJumpDirection * wallJumpAngle.x, wallJumpForce * wallJumpAngle.y), ForceMode2D.Impulse);
+                    rb.velocity = new Vector2(wallJumpForce * isLeftOrRight, DJump.jumpForce);
                 }
             }
         }
+    }
+
+    void LeftOrRight()
+    {
+        if (basic.OnRightWall)
+            isLeftOrRight = -1;
+        else if (basic.OnLeftWall)
+            isLeftOrRight = 1;
     }
 
 }

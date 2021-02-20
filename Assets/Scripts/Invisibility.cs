@@ -5,20 +5,17 @@ using UnityEngine;
 public class Invisibility : MonoBehaviour
 {
   public bool canInvis = false;
-  Renderer playerRender;
-  Material material; 
+  [SerializeField] SpriteRenderer playerRender;
   Color originalColour;
   [SerializeField] float invisTime = 3.0f;
   Transform playerTransform;
-  [SerializeField] GameObject player;
-  [SerializeField] GameObject enemy;
+
   public bool ignoreCollide;
 
     void Start() {
-        playerRender = GetComponent<Renderer>();
         playerTransform = GetComponent<Transform>();
         canInvis = true;
-        originalColour = playerRender.material.color;
+        originalColour = playerRender.color;
         ignoreCollide = false;
     }
 
@@ -36,11 +33,11 @@ public class Invisibility : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.RightShift))
         {
-            playerRender.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, (originalColour.a/2));
+            playerRender.color = new Color(originalColour.r, originalColour.g, originalColour.b, (originalColour.a/2));
             canInvis = false;  
             Physics2D.IgnoreLayerCollision(11, 10, ignoreCollide = true);
             yield return new WaitForSeconds(invisTime);
-            playerRender.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, (originalColour.a));
+            playerRender.color = new Color(originalColour.r, originalColour.g, originalColour.b, (originalColour.a));
             canInvis = true;   
             Physics2D.IgnoreLayerCollision(11, 10, ignoreCollide = false);
         }
