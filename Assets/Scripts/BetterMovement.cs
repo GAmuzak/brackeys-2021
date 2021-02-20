@@ -12,8 +12,8 @@ public class BetterMovement : MonoBehaviour
     public float teleportDistance = 2.0f;
     public float collisionRadius = 0.25f;
     public float wallSlideSpeed = 0.5f;
-    public float jumpForce;
-    public float walkSpeed = 50;
+    public float jumpForce = 5;
+    public float walkSpeed = 10;
     public float wallJumpLerp = 10;
     public Vector2 bottomOffset;
     public Vector2 rightOffset;
@@ -34,6 +34,7 @@ public class BetterMovement : MonoBehaviour
     public bool OnRightWall;
     public bool OnLeftWall;
 
+    public int side = 1;
     void Start()
     {
         
@@ -99,16 +100,18 @@ public class BetterMovement : MonoBehaviour
         wallJumped = true;
     }
 
-    void WallSlide()
-    {
-
-    }
+    
     void Jump(Vector2 dir, bool wall)
     {
         //rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.velocity += dir * jumpForce;
     }
-    
+
+    void WallSlide()
+    {
+
+    }
+
     void Walk(Vector2 moveDir)
     {
         if (!canMove)
