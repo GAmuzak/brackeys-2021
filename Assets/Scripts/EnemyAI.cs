@@ -36,12 +36,11 @@ public class EnemyAI : MonoBehaviour
 
         else
         {
-            if(isAgro)
-                if (!isSearching)
-                {
-                    isSearching = true;
-                    Invoke("StopChasingPlayer", 5);
-                }
+            if(isAgro && !isSearching)
+            {
+                isSearching = true;
+                Invoke(nameof(StopChasingPlayer), 5);
+            }
                 
         }
 
