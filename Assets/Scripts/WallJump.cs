@@ -5,18 +5,18 @@ using UnityEngine;
 public class WallJump : MonoBehaviour
 {
     [SerializeField] bool isWallJumping = false;
+    [SerializeField] bool isWallSliding;
+    [SerializeField] bool isTouchingWall;
     [SerializeField] float wallSlideSpeed = 0f;
+    [SerializeField] float wallJumpForce;
     [SerializeField] Jump_DJump DJump;
     [SerializeField] BasicMovement basic;
     [SerializeField] LayerMask wallLayer;
-    [SerializeField] Transform wallCheckPoint;
+    [SerializeField] Vector2 wallJumpAngle;
     [SerializeField] Vector2 wallCheckSize;
     [SerializeField] Transform side;
-    [SerializeField] bool isTouchingWall;
+    [SerializeField] Transform wallCheckPoint;
     [SerializeField] Rigidbody2D rb_body;
-    [SerializeField] bool isWallSliding;
-    [SerializeField] float wallJumpForce;
-    [SerializeField] Vector2 wallJumpAngle;
 
     private void Start() {
         rb_body = GetComponent<Rigidbody2D>();
