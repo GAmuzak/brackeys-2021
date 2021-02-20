@@ -694,11 +694,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39c2e04b37f23e488a461e3be942ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 6
   wallJumpLerp: 10
-  jumpForce: 5
+  jumpForce: 6
   wallSlide: 0
-  slideSpeed: 5
+  slideSpeed: 2
+  playerTransform: {fileID: 1739752763}
+  teleportDistance: 2
+  side: 1
+  wallJumped: 0
+  canMove: 1
+  canTeleport: 1
+  canDoubleJump: 1
+  extraJumps: 0
 --- !u!114 &1739752767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -733,7 +741,7 @@ MonoBehaviour:
   onRightWall: 0
   onLeftWall: 0
   wallSide: 0
-  collisionRadius: 0.25
+  collisionRadius: 0.19
   bottomOffset: {x: 0, y: -0.5}
   rightOffset: {x: 0.3, y: 0}
   leftOffset: {x: -0.3, y: 0}

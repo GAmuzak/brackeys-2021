@@ -15,25 +15,35 @@ public class RishavMovement : MonoBehaviour
     private float jumpForce = 5;
     public bool wallSlide=false;
     [SerializeField]
-    private float slideSpeed = 200f;
+    private float slideSpeed = 4;
+    public Transform playerTransform;
+    public float teleportDistance = 2.0f;
+    public int side = 1;
+    private bool wallJumped = false;
 
-    public bool wallJumped=false;
+
+    public bool canWallJump = false;
     public bool canMove=true;
-
+    public bool canTeleport=true;
+    public bool canDoubleJump = false;
+    public int extraJumps = 0;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        if (canDoubleJump)
+            extraJumps = 1;
+        else extraJumps = 0;
         coll = GetComponent<RishavCollision>();
-        Debug.Log(Time.deltaTime);
         rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
         Vector2 dir = new Vector2(x, y);
@@ -42,8 +52,18 @@ public class RishavMovement : MonoBehaviour
         {
             if (coll.onGround)
                 Jump(Vector2.up);
-            if (coll.onWall && !coll.onGround)
+            else if (extraJumps > 0)
+            {
+                Jump(Vector2.up);
+                extraJumps = 0;
+            }
+            if (coll.onWall && !coll.onGround && canWallJump)
                 WallJump();
+
+        }
+        if (coll.onGround && canDoubleJump)
+        {
+            extraJumps = 1;
         }
         if(coll.onWall && !coll.onGround)
         {
@@ -53,11 +73,25 @@ public class RishavMovement : MonoBehaviour
                 WallSlide();
             }
         }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            TeleportPlayer();
+        }
+
+        if (x > 0)
+        {
+            side = 1;
+        }
+        if (x < 0)
+        {
+            side = -1;
+        }
     }
 
 
     private void WallJump()
     {
+
         StopCoroutine(DisableMovement(0));
         StartCoroutine(DisableMovement(.5f));
 
@@ -67,6 +101,8 @@ public class RishavMovement : MonoBehaviour
 
         wallJumped = true;
     }
+
+
     private void Walk(Vector2 dir)
     {
         if (!canMove)
@@ -90,13 +126,8 @@ public class RishavMovement : MonoBehaviour
 
     private void WallSlide()
     {
-        bool pushingWall = false;
-        if ((rb.velocity.x > 0 && coll.onRightWall) || (rb.velocity.x < 0 && coll.onLeftWall))
-        {
-            pushingWall = true;
-        }
-        float push = pushingWall ? rb.velocity.x:0;
-        rb.velocity = new Vector2(push, -slideSpeed*Time.deltaTime);
+        
+        rb.velocity = new Vector2(rb.velocity.x, -slideSpeed);
     }
 
     IEnumerator DisableMovement(float time)
@@ -104,5 +135,27 @@ public class RishavMovement : MonoBehaviour
         canMove = false;
         yield return new WaitForSeconds(time);
         canMove = true;
+    }
+
+    IEnumerator DisableTeleport(float time)
+    {
+        canTeleport = false;
+        yield return new WaitForSeconds(time);
+        canTeleport = true;
+    }
+
+    void TeleportPlayer() 
+    {
+        if (canTeleport)
+        {
+            StopCoroutine(DisableTeleport(0));
+            StartCoroutine(DisableTeleport(.5f));
+
+            if (side>0) 
+                    playerTransform.position = new Vector2(playerTransform.position.x + teleportDistance, playerTransform.position.y);
+                else 
+                    playerTransform.position = new Vector2(playerTransform.position.x - teleportDistance, playerTransform.position.y);
+            
+        }
     }
 } 
