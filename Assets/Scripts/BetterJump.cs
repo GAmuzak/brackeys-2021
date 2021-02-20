@@ -4,25 +4,23 @@ using UnityEngine;
 
 public class BetterJump : MonoBehaviour
 {
-    [SerializeField]
-    private float fallMultiplier = 2.5f;
-    [SerializeField]
-    private float lowJumpMultiplier = 1.5f;
 
-    Rigidbody2D rb;
+    private Rigidbody2D rb;
+    public float fallMultiplier = 2.5f;
+    public float lowJumpMultiplier = 2f;
 
-    private void Awake()
+    void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    void Update()
     {
-        if (rb.velocity.y < -0.001f)
+        if (rb.velocity.y < 0)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if(rb.velocity.y> 0.001f && !Input.GetButtonDown("Jump"))
+        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
