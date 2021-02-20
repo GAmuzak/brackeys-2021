@@ -5,7 +5,10 @@ using UnityEngine;
 public class BetterMovement : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
-    
+    [SerializeField] Animation animControl;
+    [SerializeField] private float fallMultiplier = 2.5f;
+    [SerializeField] private float lowJumpMultiplier = 1.5f;
+
     public Transform playerTransform;
     public LayerMask groundLayer;
 
@@ -15,26 +18,31 @@ public class BetterMovement : MonoBehaviour
     public float jumpForce = 5;
     public float walkSpeed = 10;
     public float wallJumpLerp = 10;
+
     public Vector2 bottomOffset;
     public Vector2 rightOffset;
     public Vector2 leftOffset;
 
     private Vector2 moveDir;
 
-    public bool canTeleport = true;
     bool doubleJump;
+
     bool wallGrab;
+    public bool canTeleport = true;
     bool wallJumped;
     bool wallSlide;
     bool teleport;
     bool canMove = true;
 
+    public bool canDoubleJump;
     public bool OnGround;
     public bool OnWall;
     public bool OnRightWall;
     public bool OnLeftWall;
 
     public int side = 1;
+    public int jumpCounter;
+    public int extraJumps = 0;
     void Start()
     {
         
@@ -43,25 +51,34 @@ public class BetterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DetectCollisions();
         moveDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         Walk(moveDir);
-        if(Input.GetButtonDown("Jump"))
-        {
-            if(OnGround)
-            Jump(Vector2.up, false);
+        animControl.setAxes(moveDir.x, moveDir.y, rb.velocity.y);
+
         
-            if (OnWall && !OnGround)
-                WallJump();
-        }
         Teleport();
 
-        if (OnGround)
-            wallJumped = false;
+        if(Input.GetButtonDown("Jump"))
+        {
+            if (OnGround)
+                Jump(Vector2.up * jumpForce, false);
+            else if (OnWall)
+                WallJump();
+        }
+
+        if (rb.velocity.y < -0.001f)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (rb.velocity.y > 0.001f && !Input.GetButtonDown("Jump"))
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
     {
+        DetectCollisions();
     }
 
     void DetectCollisions()
@@ -94,18 +111,18 @@ public class BetterMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(transform.position.x, -wallSlideSpeed);
         }
-
+    
         Vector2 wallDir = OnRightWall ? Vector2.left : Vector2.right;
-        Jump((Vector2.up + wallDir), true);
+        Jump((Vector2.up + wallDir*2), true);
         wallJumped = true;
     }
 
-    
+
     void Jump(Vector2 dir, bool wall)
     {
-        if (Input.GetButtonDown("Jump") && OnGround)
-        //rb.velocity = new Vector2(rb.velocity.x, 0f);
+        rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.velocity += dir * jumpForce;
+
     }
 
     void WallSlide()

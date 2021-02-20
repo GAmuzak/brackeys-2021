@@ -10,7 +10,7 @@ public class Jump_DJump : MonoBehaviour
     public int extraJumps = 0;
     public bool canJump;
     public bool canDJump = false;
-
+    bool wallJumped = false;
     [SerializeField] BasicMovement basic;
     [SerializeField] LayerMask enemyMask;
     [SerializeField] Rigidbody2D rb;
@@ -22,7 +22,6 @@ public class Jump_DJump : MonoBehaviour
     void Start()
     {
         rb = player.GetComponent<Rigidbody2D>();
-        canDJump = false;
     }
 
     // Update is called once per frame
@@ -30,55 +29,69 @@ public class Jump_DJump : MonoBehaviour
     void Update()
     {
         CanDJump();
-        if (canJump)
-        {
-            Jump();
-        }
-        CheckGrounded();
-    }
+        
+                Jump(Vector2.up, false);
+                WallJump();
 
-    void CanDJump()
-    {
-        if (canDJump)
-            extraJumps = 1;
-        else
-            extraJumps = 0;
-    }
-    void Jump()
-    {
-        if (Input.GetButtonDown("Jump"))
+            CheckGrounded();
+
+        void CanDJump()
         {
-            if (basic.OnGround || jumpCount < extraJumps)
+            if (canDJump)
+                extraJumps = 1;
+            else
+                extraJumps = 0;
+        }
+
+        void Jump(Vector2 dir, bool wall)
+        {
+            if (Input.GetButtonDown("Jump"))
             {
-                rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-                if (extraJumps > 0)
+                if (basic.OnGround || jumpCount < extraJumps)
                 {
-                    jumpCount++;
-                }
-                else
-                {
-                    return;
+                    rb.AddForce(dir * jumpForce, ForceMode2D.Impulse);
+                    if (extraJumps > 0)
+                    {
+                        jumpCount++;
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
             }
         }
-    }
-    void CheckGrounded()
-    {
-        if (basic.OnGround||basic.OnEnemy)
+
+        void WallJump()
         {
-            jumpCount = 0;
-            jumpCooldown = Time.time + 0.0001f;
-            canJump = true;
+            if (Input.GetButtonDown("Jump"))
+            {
+                if (basic.OnWall)
+                {
+                    Vector2 wallDir = basic.OnRightWall ? Vector2.left : Vector2.right;
+                    Jump((Vector2.up + wallDir * 2), true);
+                    wallJumped = true;
+                }
+            }
         }
-        else if (Time.time < jumpCooldown)
+        void CheckGrounded()
         {
-            basic.OnGround = true;
+            if (basic.OnGround || basic.OnEnemy)
+            {
+                jumpCount = 0;
+                jumpCooldown = Time.time + 0.0001f;
+                canJump = true;
+            }
+            else if (Time.time < jumpCooldown)
+            {
+                basic.OnGround = true;
+            }
+            else
+            {
+                basic.OnGround = false;
+            }
         }
-        else
-        {
-            basic.OnGround = false;
-        }
-    }
 
 
+    }
 }

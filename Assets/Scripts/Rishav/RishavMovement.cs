@@ -16,6 +16,9 @@ public class RishavMovement : MonoBehaviour
     public bool wallSlide=false;
     [SerializeField]
     private float slideSpeed = 4;
+
+    [SerializeField]
+    Animation animControl;
     public Transform playerTransform;
     public float teleportDistance = 2.0f;
     public int side = 1;
@@ -48,6 +51,14 @@ public class RishavMovement : MonoBehaviour
         float y = Input.GetAxisRaw("Vertical");
         Vector2 dir = new Vector2(x, y);
         Walk(dir);
+
+        if(coll.onWall)
+        {
+            if (side != coll.wallSide)
+                animControl.Flip(side * -1);
+
+        }
+        animControl.setAxes(x, y, rb.velocity.y);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (coll.onGround)
@@ -73,6 +84,9 @@ public class RishavMovement : MonoBehaviour
                 WallSlide();
             }
         }
+        if (!coll.onWall)
+            wallSlide = false;
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             TeleportPlayer();
@@ -81,10 +95,12 @@ public class RishavMovement : MonoBehaviour
         if (x > 0)
         {
             side = 1;
+            animControl.Flip(side);
         }
         if (x < 0)
         {
             side = -1;
+            animControl.Flip(side);
         }
     }
 
@@ -128,6 +144,7 @@ public class RishavMovement : MonoBehaviour
     {
         
         rb.velocity = new Vector2(rb.velocity.x, -slideSpeed);
+        wallSlide = true;
     }
 
     IEnumerator DisableMovement(float time)
