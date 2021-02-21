@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class ActivateDJump : MonoBehaviour
 {
-    private Renderer buttonRenderer;
-    [SerializeField] GameObject button;
-    [SerializeField] Jump_DJump dJump;
-    void Start() {
-        buttonRenderer = button.GetComponent<Renderer>();
+    public Color Fairycolor;
+    private SpriteRenderer fairyRenderer;
+    public RishavMovement player;
+
+    void Start() 
+    {
+        fairyRenderer = this.GetComponent<SpriteRenderer>();
     }
 
-   private void OnTriggerStay2D(Collider2D other) {
-       if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E))
-       {
-           buttonRenderer.material.color = Color.green;
-           dJump.canDJump = true;
-       }
-   }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player")) 
+        {
+            player.canDoubleJump = true;
+            player.GetComponent<SpriteRenderer>().color = Fairycolor;
+            //fairyRenderer.sprite = null;
+        }
+    }
+
+
 }
