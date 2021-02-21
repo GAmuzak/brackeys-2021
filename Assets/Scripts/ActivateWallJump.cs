@@ -4,22 +4,43 @@ using UnityEngine;
 
 public class ActivateWallJump : MonoBehaviour
 {
-   [SerializeField] RishavMovement characterMovement;
+    [SerializeField] RishavMovement characterMovement;
+    public SpriteRenderer DJfairy;
+    public SpriteRenderer WJfairy;
+    public SpriteRenderer TeleFairy;
     public Color Fairycolor;
     private SpriteRenderer fairyRenderer;
 
-    private void Start()
+    private void Update()
     {
+        setFairies();
     }
-    void OnTriggerEnter2D(Collider2D other) 
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            characterMovement.canDoubleJump = true;
+            characterMovement.canWallJump = true;
             characterMovement.wallSlide = true;
-            characterMovement.canWallJump = false;
-            characterMovement.canTeleport = false;
-            characterMovement.GetComponent<SpriteRenderer>().color = Fairycolor;
+            //characterMovement.GetComponent<SpriteRenderer>().color = Fairycolor;
+            setFairies();
         }
+    }
+
+    void setFairies()
+    {
+        if (characterMovement.canDoubleJump == true)
+            DJfairy.enabled = true;
+        else
+            DJfairy.enabled = false;
+
+        if (characterMovement.canWallJump == true)
+            WJfairy.enabled = true;
+        else
+            WJfairy.enabled = false;
+
+        if (characterMovement.canTeleport == true)
+            TeleFairy.enabled = true;
+        else
+            TeleFairy.enabled = false;
     }
 }

@@ -5,14 +5,13 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] Transform player;
-    [SerializeField] BasicMovement basic;
     [SerializeField] EnemyPatrol patrol;
     [SerializeField] Invisibility invisibility;
     [SerializeField] float agroRange;
     [SerializeField] Transform castPoint;
     [SerializeField] float patrolSpeed;
     [SerializeField] float delayTime;
-    float enemySpeed;
+    [SerializeField] float enemySpeed;
     Rigidbody2D rb2d;
     public bool isFacingRight;
     public bool isAgro;
@@ -21,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        enemySpeed = basic.movementSpeed - 1.5f;
+        enemySpeed = 7f;
     }
 
     // Update is called once per frame
