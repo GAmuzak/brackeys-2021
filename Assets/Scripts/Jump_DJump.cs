@@ -10,7 +10,7 @@ public class Jump_DJump : MonoBehaviour
     public int extraJumps = 0;
     public bool canJump;
     public bool canDJump = false;
-    bool wallJumped = false;
+    //bool wallJumped = false;
     [SerializeField] BasicMovement basic;
     [SerializeField] LayerMask enemyMask;
     [SerializeField] Rigidbody2D rb;
@@ -70,7 +70,7 @@ public class Jump_DJump : MonoBehaviour
                 {
                     Vector2 wallDir = basic.OnRightWall ? Vector2.left : Vector2.right;
                     Jump((Vector2.up + wallDir * 2), true);
-                    wallJumped = true;
+                    //wallJumped = true;
                 }
             }
         }
