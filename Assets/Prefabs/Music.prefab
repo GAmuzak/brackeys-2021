@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5987598291101934939}
-  - component: {fileID: 5987598291101934938}
+  - component: {fileID: 7094873431465402194}
   - component: {fileID: 5987598291101934933}
   m_Layer: 0
   m_Name: Music
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5987598291101934938
+--- !u!114 &7094873431465402194
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,12 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5987598291101934932}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa1f3cb340b342c4f8a5576276a3901c, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d766e75890662443802f84b72612bfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: f85c02a9362d0854bb8af03118c27d4b, type: 3}
-  - {fileID: 8300000, guid: 1400588c5c2a2144494d64e9063d3306, type: 3}
+  clips: []
 --- !u!82 &5987598291101934933
 AudioSource:
   m_ObjectHideFlags: 0
