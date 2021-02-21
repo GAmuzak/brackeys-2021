@@ -3285,6 +3285,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2129333116682505361, guid: f261cb257eb4b064a9913a3150fb7b9d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.413
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129333116682505361, guid: f261cb257eb4b064a9913a3150fb7b9d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.341
+      objectReference: {fileID: 0}
     - target: {fileID: 4959370961365760116, guid: f261cb257eb4b064a9913a3150fb7b9d,
         type: 3}
       propertyPath: wallSlide
@@ -3364,6 +3374,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5759462124958452857, guid: f261cb257eb4b064a9913a3150fb7b9d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.212
+      objectReference: {fileID: 0}
+    - target: {fileID: 5759462124958452857, guid: f261cb257eb4b064a9913a3150fb7b9d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.575
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f261cb257eb4b064a9913a3150fb7b9d, type: 3}
