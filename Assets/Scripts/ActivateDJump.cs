@@ -37,16 +37,6 @@ public class ActivateDJump : MonoBehaviour
             DJfairy.enabled = true;
         else
             DJfairy.enabled = false;
-
-        if (player.canWallJump == true)
-            WJfairy.enabled = true;
-        else
-            WJfairy.enabled = false;
-
-        if (player.canTeleport == true)
-            TeleFairy.enabled = true;
-        else
-            TeleFairy.enabled = false;
     }
 
 

@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 9155427395522966169}
   - component: {fileID: 9155427395522966168}
   - component: {fileID: 9155427395522966162}
+  - component: {fileID: 8983206581994690652}
   m_Layer: 10
   m_Name: FollowEnemy
   m_TagString: Untagged
@@ -265,13 +266,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  basic: {fileID: 0}
   patrol: {fileID: 9155427395522966162}
   invisibility: {fileID: 0}
   agroRange: 4
   castPoint: {fileID: 9155427394198009697}
   patrolSpeed: 3
   delayTime: 2
+  enemySpeed: 0
   isFacingRight: 0
   isAgro: 0
 --- !u!114 &9155427395522966162
@@ -290,3 +291,15 @@ MonoBehaviour:
   patrolSpeed: 3
   sensePlayer: {fileID: 9155427395522966168}
   onPatrol: 0
+--- !u!114 &8983206581994690652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9155427395522966171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2086101c3beb1724ba97a8a1a54002e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

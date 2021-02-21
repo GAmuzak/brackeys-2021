@@ -28,19 +28,13 @@ public class ActivateWallJump : MonoBehaviour
 
     void setFairies()
     {
-        if (characterMovement.canDoubleJump == true)
-            DJfairy.enabled = true;
-        else
-            DJfairy.enabled = false;
+ 
 
         if (characterMovement.canWallJump == true)
             WJfairy.enabled = true;
         else
             WJfairy.enabled = false;
 
-        if (characterMovement.canTeleport == true)
-            TeleFairy.enabled = true;
-        else
-            TeleFairy.enabled = false;
+        
     }
 }

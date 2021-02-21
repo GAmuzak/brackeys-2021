@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        enemySpeed = 7f;
+        enemySpeed = 3f;
     }
 
     // Update is called once per frame

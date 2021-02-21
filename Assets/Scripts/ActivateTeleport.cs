@@ -5,18 +5,25 @@ using UnityEngine;
 public class ActivateTeleport : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Renderer buttonRenderer;
-    [SerializeField] GameObject button;
-    [SerializeField] Teleport teleport;
-    void Start() {
-        buttonRenderer = button.GetComponent<Renderer>();
-    }
+    [SerializeField] RishavMovement characterMovement;
+    public SpriteRenderer TeleFairy;
 
-   private void OnTriggerStay2D(Collider2D other) {
-       if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E))
+    private void Update()
+    {
+        setFairies();
+    }
+    private void OnTriggerStay2D(Collider2D other) 
+   {
+       if (other.CompareTag("Player"))
        {
-           buttonRenderer.material.color = Color.green;
-           teleport.canTeleport = true;
+           characterMovement.canTeleport = true;
        }
    }
+    void setFairies()
+    {
+        if (characterMovement.canTeleport == true)
+            TeleFairy.enabled = true;
+        else if (characterMovement.canTeleport == false)
+            TeleFairy.enabled = false;
+    }
 }

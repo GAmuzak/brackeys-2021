@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Invisibility : MonoBehaviour
 {
+  public bool invisAbility = false;
   public bool canInvis = false;
   [SerializeField] SpriteRenderer playerRender;
   Color originalColour;
@@ -21,9 +22,10 @@ public class Invisibility : MonoBehaviour
 
     void Update() {
         {
-            if (canInvis)
+            if (canInvis && invisAbility)
             {
                 StartCoroutine(TimeInvis());
+                //StartCoroutine(coolDown());
             }
         }
     }
@@ -42,5 +44,12 @@ public class Invisibility : MonoBehaviour
             Physics2D.IgnoreLayerCollision(11, 10, ignoreCollide = false);
         }
     }
+
+    //IEnumerator coolDown()
+    //{
+    //    canInvis = false;
+    //    yield return new WaitForSeconds(1.0f);
+    //    canInvis = true;
+    //}
 
 }

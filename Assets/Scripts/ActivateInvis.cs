@@ -23,7 +23,7 @@ public class ActivateInvis : MonoBehaviour
     {
         if (invisibility.canInvis == true)
             InvFairy.enabled = true;
-        else
+        else if (invisibility.canInvis == false)
             InvFairy.enabled = false;
 
         
