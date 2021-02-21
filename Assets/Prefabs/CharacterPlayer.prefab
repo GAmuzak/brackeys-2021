@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 548688091425933748}
   - component: {fileID: 5261283008302508829}
   - component: {fileID: 453911732507140621}
+  - component: {fileID: 2950589256749795773}
   - component: {fileID: 6300380160541328305}
   - component: {fileID: 7380364965565803657}
   - component: {fileID: 3643387156370863530}
@@ -141,6 +142,7 @@ MonoBehaviour:
   jumpForce: 5
   wallSlide: 0
   slideSpeed: 4
+  animControl: {fileID: 0}
   playerTransform: {fileID: 548688091425933744}
   teleportDistance: 2
   side: 1
@@ -149,6 +151,22 @@ MonoBehaviour:
   canTeleport: 1
   canDoubleJump: 0
   extraJumps: 0
+--- !u!114 &2950589256749795773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548688091425933755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e975ca294075344bcb542e54a963f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canInvis: 0
+  playerRender: {fileID: 5261283008302508829}
+  invisTime: 3
+  ignoreCollide: 0
 --- !u!114 &6300380160541328305
 MonoBehaviour:
   m_ObjectHideFlags: 0

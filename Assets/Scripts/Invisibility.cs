@@ -14,7 +14,7 @@ public class Invisibility : MonoBehaviour
 
     void Start() {
         playerTransform = GetComponent<Transform>();
-        canInvis = true;
+
         originalColour = playerRender.color;
         ignoreCollide = false;
     }
