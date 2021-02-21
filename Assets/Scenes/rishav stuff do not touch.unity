@@ -564,6 +564,7 @@ GameObject:
   - component: {fileID: 1739752766}
   - component: {fileID: 1739752767}
   - component: {fileID: 1739752768}
+  - component: {fileID: 1739752769}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -702,7 +703,7 @@ MonoBehaviour:
   playerTransform: {fileID: 1739752763}
   teleportDistance: 2
   side: 1
-  wallJumped: 0
+  canWallJump: 1
   canMove: 1
   canTeleport: 1
   canDoubleJump: 1
@@ -745,3 +746,19 @@ MonoBehaviour:
   bottomOffset: {x: 0, y: -0.5}
   rightOffset: {x: 0.3, y: 0}
   leftOffset: {x: -0.3, y: 0}
+--- !u!114 &1739752769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739752761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e975ca294075344bcb542e54a963f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canInvis: 1
+  playerRender: {fileID: 1739752762}
+  invisTime: 3
+  ignoreCollide: 0
