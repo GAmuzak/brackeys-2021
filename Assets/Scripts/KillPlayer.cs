@@ -10,8 +10,15 @@ public class KillPlayer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Scene scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
+
+            SfxManager.Instance.SetClipToPlay(1);
+            Invoke(nameof(kill), 0.5f);
         }
+    }
+
+    void kill()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }

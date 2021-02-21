@@ -17,17 +17,11 @@ public class SfxManager : Singleton<SfxManager>
         sfxSource = GetComponent<AudioSource>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SetClipToPlay(0);
-        }
-    }
+    
 
-    public void SetClipToPlay(MusicClip m)
+    public void SetClipToPlay( int m)
     {
-        sfxSource.clip = clips[(int)m];
+        sfxSource.clip = clips[m];
         sfxSource.Play();
     }
 }

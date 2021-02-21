@@ -5,9 +5,7 @@ using UnityEngine;
 public class ActivateWallJump : MonoBehaviour
 {
     [SerializeField] RishavMovement characterMovement;
-    public SpriteRenderer DJfairy;
     public SpriteRenderer WJfairy;
-    public SpriteRenderer TeleFairy;
     public Color Fairycolor;
     private SpriteRenderer fairyRenderer;
 

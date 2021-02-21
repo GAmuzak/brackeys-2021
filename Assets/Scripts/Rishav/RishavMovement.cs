@@ -69,14 +69,21 @@ public class RishavMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (coll.onGround)
+            {
                 Jump(Vector2.up);
+                SfxManager.Instance.SetClipToPlay(0);
+            }
             else if (extraJumps > 0)
             {
                 Jump(Vector2.up);
+                SfxManager.Instance.SetClipToPlay(0);
                 extraJumps = 0;
             }
             if (coll.onWall && !coll.onGround && canWallJump)
+            {
                 WallJump();
+                SfxManager.Instance.SetClipToPlay(0);
+            }
 
         }
         if (coll.onGround && canDoubleJump)

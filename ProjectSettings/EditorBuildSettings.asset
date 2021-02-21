@@ -14,7 +14,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Prototype.unity
     guid: f8696ba97810114448712d59019b7ae0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/L1.unity
     guid: a9342299b3d9f3142869aacad0a1c209
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 9781a5215b155a94097cd26abb81af97
+  - enabled: 1
+    path: Assets/Scenes/chonkk.unity
+    guid: feab645cf7a85474f8c713ee52101806
   m_configObjects: {}

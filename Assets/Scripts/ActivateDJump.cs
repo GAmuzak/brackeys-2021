@@ -6,8 +6,6 @@ public class ActivateDJump : MonoBehaviour
 {
     public Color Fairycolor;
     public SpriteRenderer DJfairy;
-    public SpriteRenderer WJfairy;
-    public SpriteRenderer TeleFairy;
     private SpriteRenderer fairyRenderer;
     public RishavMovement player;
 
