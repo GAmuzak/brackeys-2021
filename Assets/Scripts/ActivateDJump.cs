@@ -18,6 +18,9 @@ public class ActivateDJump : MonoBehaviour
         if (other.gameObject.CompareTag("Player")) 
         {
             player.canDoubleJump = true;
+            player.wallSlide = true;
+            player.canWallJump = false;
+            player.canTeleport = false;
             player.GetComponent<SpriteRenderer>().color = Fairycolor;
             //fairyRenderer.sprite = null;
         }
