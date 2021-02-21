@@ -18,7 +18,7 @@ public class RishavMovement : MonoBehaviour
     private float slideSpeed = 4;
 
     [SerializeField]
-    Animation animControl;
+    PlayerAnim animControl;
     public Transform playerTransform;
     public float teleportDistance = 2.0f;
     public int side = 1;

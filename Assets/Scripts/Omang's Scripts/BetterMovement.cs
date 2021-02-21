@@ -5,7 +5,7 @@ using UnityEngine;
 public class BetterMovement : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] Animation animControl;
+    [SerializeField] PlayerAnim animControl;
     [SerializeField] private float fallMultiplier = 2.5f;
     [SerializeField] private float lowJumpMultiplier = 1.5f;
 

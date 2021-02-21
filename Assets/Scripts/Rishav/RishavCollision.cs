@@ -25,11 +25,10 @@ public class RishavCollision : MonoBehaviour
     void Update()
     {
         onGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, layers);
-        onWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, layers)
-            || Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, collisionRadius, layers);
 
         onRightWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, layers);
         onLeftWall = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, collisionRadius, layers);
+        onWall = onRightWall || onLeftWall;
 
         wallSide = onRightWall ? -1 : 1;
     }

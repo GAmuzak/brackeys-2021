@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Animation : MonoBehaviour
+public class PlayerAnim : MonoBehaviour
 {
     RishavCollision movementScript;
     RishavMovement move;
